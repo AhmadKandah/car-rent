@@ -26,7 +26,10 @@
                             <p><span class="font-medium">رقم اللوحة:</span> {{ $car->license_plate }}</p>
                             <p><span class="font-medium">السنة:</span> {{ $car->year }}</p>
                             <p><span class="font-medium">اللون:</span> {{ $car->color }}</p>
-                            <p><span class="font-medium">السعر اليومي:</span> {{ number_format($car->rental_rate, 2) }} ريال</p>
+                            <p><span class="font-medium">السعر الشهري:</span> {{ number_format($car->price_per_month, 2) }} ريال</p>
+                            <p><span class="font-medium">السعر اليومي:</span> {{ number_format($car->price_per_day, 2) }} ريال</p>
+                            <p><span class="font-medium">السعر لساعة واحدة:</span> {{ number_format($car->price_per_hour, 2) }} ريال</p>
+
                             <p>
                                 <span class="font-medium">الحالة:</span>
                                 <span class="px-3 py-1 rounded-full text-sm font-medium {{ $car->status === 'available' ? 'bg-green-100 text-green-800' : ($car->status === 'rented' ? 'bg-yellow-100 text-yellow-800' : 'bg-red-100 text-red-800') }}">
@@ -36,10 +39,10 @@
                         </div>
                         <div class="mt-6 flex justify-end space-x-2 space-x-reverse">
                             @if (auth()->user()->role === 'admin')
-                                <a href="{{ route('cars.edit', $car->car_id) }}" class="inline-flex items-center px-3 py-1 bg-blue-600 text-white text-sm rounded-md hover:bg-blue-700 transition-all duration-300 transform hover:scale-105">
+                                <a href="{{ route('cars.edit', $car->id) }}" class="inline-flex items-center px-3 py-1 bg-blue-600 text-white text-sm rounded-md hover:bg-blue-700 transition-all duration-300 transform hover:scale-105">
                                     تعديل
                                 </a>
-                                <form action="{{ route('cars.destroy', $car->car_id) }}" method="POST" class="inline">
+                                <form action="{{ route('cars.destroy', $car->id) }}" method="POST" class="inline">
                                     @csrf
                                     @method('DELETE')
                                     <button type="submit" class="inline-flex items-center px-3 py-1 bg-red-600 text-white text-sm rounded-md hover:bg-red-700 transition-all duration-300 transform hover:scale-105" onclick="return confirm('هل أنت متأكد؟')">

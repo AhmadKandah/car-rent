@@ -2,7 +2,7 @@
 @section('title', 'تعديل السيارة')
 @section('content')
     <h1 class="text-4xl font-bold text-gray-800 mb-8 text-center">تعديل بيانات السيارة</h1>
-    <form action="{{ route('cars.update', $car->car_id) }}" method="POST" enctype="multipart/form-data" class="bg-white p-8 rounded-xl shadow-lg max-w-2xl mx-auto">
+    <form action="{{ route('cars.update', $car->id) }}" method="POST" enctype="multipart/form-data" class="bg-white p-8 rounded-xl shadow-lg max-w-2xl mx-auto">
         @csrf
         @method('PUT')
         <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
@@ -13,6 +13,21 @@
                     <span class="text-red-600 text-sm mt-1">{{ $message }}</span>
                 @enderror
             </div>
+            <div>
+                <label class="block text-sm font-semibold text-gray-700 mb-2">brand</label>
+                <input type="text" name="brand" value="{{ old('brand', $car->make) }}" class="block w-full border-gray-300 rounded-md shadow-sm focus:ring-blue-500 focus:border-blue-500" required>
+                @error('brand')
+                    <span class="text-red-600 text-sm mt-1">{{ $message }}</span>
+                @enderror
+            </div>
+            <div>
+                <label class="block text-sm font-semibold text-gray-700 mb-2">الوصف</label>
+                <input type="text" name="description" value="{{ old('description', $car->description) }}" class="block w-full border-gray-300 rounded-md shadow-sm focus:ring-blue-500 focus:border-blue-500" required>
+                @error('description')
+                    <span class="text-red-600 text-sm mt-1">{{ $message }}</span>
+                @enderror
+            </div>
+
             <div>
                 <label class="block text-sm font-semibold text-gray-700 mb-2">الشركة المصنعة</label>
                 <input type="text" name="make" value="{{ old('make', $car->make) }}" class="block w-full border-gray-300 rounded-md shadow-sm focus:ring-blue-500 focus:border-blue-500" required>
@@ -43,12 +58,25 @@
             </div>
             <div>
                 <label class="block text-sm font-semibold text-gray-700 mb-2">السعر اليومي (ريال)</label>
-                <input type="number" name="rental_rate" step="0.01" value="{{ old('rental_rate', $car->rental_rate) }}" class="block w-full border-gray-300 rounded-md shadow-sm focus:ring-blue-500 focus:border-blue-500" required>
-                @error('rental_rate')
+                <input type="number" name="price_per_month" step="0.01" value="{{ old('price_per_month', $car->price_per_month) }}" class="block w-full border-gray-300 rounded-md shadow-sm focus:ring-blue-500 focus:border-blue-500" required>
+                @error('price_per_month')
                     <span class="text-red-600 text-sm mt-1">{{ $message }}</span>
                 @enderror
             </div>
             <div>
+                <label class="block text-sm font-semibold text-gray-700 mb-2">السعر اليومي (ريال)</label>
+                <input type="number" name="price_per_day" step="0.01" value="{{ old('price_per_day', $car->price_per_day) }}" class="block w-full border-gray-300 rounded-md shadow-sm focus:ring-blue-500 focus:border-blue-500" required>
+                @error('price_per_day')
+                    <span class="text-red-600 text-sm mt-1">{{ $message }}</span>
+                @enderror   
+            <div>
+                <div>
+                <label class="block text-sm font-semibold text-gray-700 mb-2">السعر لساعة واحدة (ريال)</label>
+                <input type="number" name="price_per_hour" step="0.01" value="{{ old('price_per_hour', $car->price_per_hour) }}" class="block w-full border-gray-300 rounded-md shadow-sm focus:ring-blue-500 focus:border-blue-500" required> 
+                @error('price_per_hour')
+                    <span class="text-red-600 text-sm mt-1">{{ $message }}</span>   
+                @enderror
+
                 <label class="block text-sm font-semibold text-gray-700 mb-2">الحالة</label>
                 <select name="status" class="block w-full border-gray-300 rounded-md shadow-sm focus:ring-blue-500 focus:border-blue-500" required>
                     <option value="available" {{ old('status', $car->status) === 'available' ? 'selected' : '' }}>متاحة</option>

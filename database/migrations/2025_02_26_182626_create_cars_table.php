@@ -14,7 +14,6 @@ return new class extends Migration
         Schema::create('cars', function (Blueprint $table) {
             $table->id();
             $table->string('license_plate')->unique();
-            $table->string('name'); 
             $table->string('brand'); 
             $table->string('model'); 
             $table->string('make');
@@ -24,7 +23,7 @@ return new class extends Migration
             $table->decimal('price_per_day'); 
             $table->decimal('price_per_month'); 
             $table->string('description');
-            $table->enum('status', ['available', 'rented', 'unavailable'])->default('available'); 
+            $table->enum('status', ['available', 'rented', 'maintenance'])->default('available'); 
             $table->foreignId('user_id')->constrained()->onDelete('cascade'); 
 
             $table->timestamps();

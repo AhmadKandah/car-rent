@@ -31,7 +31,7 @@
                     <h2>Images</h2>
                     <div class="d-flex flex-wrap">
                         @foreach ($car->images as $image)
-                        <img src="{{ asset($image->path) }}" alt="{{ $car->name }}" class="mr-2 mb-2">
+                        <img src="{{ asset( $image->path) }}" alt="{{ $car->name }}" class="mr-2 mb-2">
                         @endforeach
                     </div>
 
