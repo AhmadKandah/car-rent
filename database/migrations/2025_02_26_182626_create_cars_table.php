@@ -12,17 +12,24 @@ return new class extends Migration
     public function up(): void
     {
         Schema::create('cars', function (Blueprint $table) {
-            $table->id('car_id');
+            $table->id();
             $table->string('license_plate')->unique();
+            $table->string('name'); 
+            $table->string('brand'); 
+            $table->string('model'); 
             $table->string('make');
-            $table->string('model');
-            $table->integer('year');
             $table->string('color');
-            $table->decimal('rental_rate', 8, 2);
-            $table->enum('status', ['available', 'rented', 'maintenance'])->default('available');
+            $table->year('year');
+            $table->decimal('price_per_hour'); 
+            $table->decimal('price_per_day'); 
+            $table->decimal('price_per_month'); 
+            $table->string('description');
+            $table->enum('status', ['available', 'rented', 'unavailable'])->default('available'); 
+            $table->foreignId('user_id')->constrained()->onDelete('cascade'); 
+
             $table->timestamps();
         });
-    }
+    } 
 
     /**
      * Reverse the migrations.

@@ -12,13 +12,12 @@ return new class extends Migration
     public function up(): void
     {
         Schema::create('reservations', function (Blueprint $table) {
-            $table->id('reservation_id');
-            $table->foreignId('customer_id')->constrained('customers', 'customer_id');
-            $table->foreignId('car_id')->constrained('cars', 'car_id');
-            $table->dateTime('start_date');
-            $table->dateTime('end_date');
-            $table->decimal('total_cost', 8, 2);
-            $table->enum('reservation_status', ['confirmed', 'cancelled', 'completed'])->default('confirmed');
+            $table->id();
+            $table->foreignId('user_id')->constrained()->onDelete('cascade'); 
+            $table->foreignId('car_id')->constrained()->onDelete('cascade');  
+            $table->date('start_date'); 
+            $table->date('end_date'); 
+            $table->enum('status', ['pending', 'confirmed', 'canceled'])->default('pending'); // حالة الحجز
             $table->timestamps();
         });
     }

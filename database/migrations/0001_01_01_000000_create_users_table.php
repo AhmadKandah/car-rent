@@ -11,22 +11,16 @@ return new class extends Migration
      */
     public function up(): void
     {
-
-        Schema::table('users', function (Blueprint $table) {
-            $table->enum('role', ['admin', 'user'])->default('user')->after('email');
-        });
-        
         Schema::create('users', function (Blueprint $table) {
             $table->id();
             $table->string('name');
             $table->string('email')->unique();
-            $table->string('password');
-            Schema::table('users', function (Blueprint $table) {
-    $table->enum('role', ['admin', 'user'])->default('user')->after('email');
-});
-            $table->enum('role', ['admin', 'user'])->default('user'); // إضافة حقل الدور
             $table->timestamp('email_verified_at')->nullable();
+            $table->string('password');
             $table->rememberToken();
+            $table->enum('role', ['user', 'owner', 'admin'])->default('user');
+            $table->string('city')->nullable();
+            $table->string('profile_image')->nullable(); // صورة الملف الشخصي
             $table->timestamps();
         });
 

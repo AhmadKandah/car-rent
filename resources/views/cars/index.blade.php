@@ -14,8 +14,8 @@
             @forelse ($cars as $car)
                 <div class="bg-white rounded-xl shadow-lg overflow-hidden transform transition-all duration-300 hover:scale-105 hover:shadow-xl">
                     <div class="h-48 w-full">
-                        @if ($car->image)
-                            <img src="{{ asset($car->image) }}" alt="{{ $car->make }} {{ $car->model }}" class="w-full h-full object-cover">
+                        @if ($car->images->count() > 0)
+                            <img src="{{ asset($car->images->first()->path) }}" alt="{{ $car->make }} {{ $car->model }}" class="w-full h-full object-cover">
                         @else
                             <div class="w-full h-full bg-gray-200 flex items-center justify-center text-gray-500 text-sm">لا توجد صورة</div>
                         @endif
@@ -47,7 +47,7 @@
                                     </button>
                                 </form>
                             @elseif ($car->status === 'available')
-                                <form action="{{ route('cars.reserve', $car->car_id) }}" method="POST" class="inline">
+                                <form action="" method="POST" class="inline">
                                     @csrf
                                     <button type="submit" class="inline-flex items-center px-3 py-1 bg-green-600 text-white text-sm rounded-md hover:bg-green-700 transition-all duration-300 transform hover:scale-105">
                                         حجز

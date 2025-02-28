@@ -6,11 +6,9 @@ namespace App\Models;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Foundation\Auth\User as Authenticatable;
 use Illuminate\Notifications\Notifiable;
-use App\Models;
+
 class User extends Authenticatable
 {
-        // باقي الكود...
-    
     /** @use HasFactory<\Database\Factories\UserFactory> */
     use HasFactory, Notifiable;
 
@@ -19,7 +17,14 @@ class User extends Authenticatable
      *
      * @var list<string>
      */
-    protected $fillable= ['name', 'email', 'password', 'role'];
+    protected $fillable = [
+        'name',
+        'email',
+        'password',
+        'role',
+        'address',
+        'city',
+    ];
 
     /**
      * The attributes that should be hidden for serialization.
@@ -43,4 +48,22 @@ class User extends Authenticatable
             'password' => 'hashed',
         ];
     }
+    public function cars()
+    {
+        return $this->hasMany(Car::class);
+    }
+    public function reservations()
+    {
+        return $this->hasMany(Reservation::class);
+    }
+    public function payments()
+    {
+        return $this->hasMany(Payment::class);
+    }
+    public function reviews()
+    {
+        return $this->hasMany(Review::class);
+    }
+   
+
 }

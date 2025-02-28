@@ -7,6 +7,13 @@ use App\Models\Customer;
 use Illuminate\Http\Request;
 
 class CarController extends Controller {
+    
+    public function test() {
+        $cars = Car::all();
+        return view('test', compact('cars'));
+    }
+    
+    
     public function index() {
         $cars = Car::all();
         return view('cars.index', compact('cars'));

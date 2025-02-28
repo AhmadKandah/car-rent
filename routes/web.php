@@ -9,6 +9,8 @@ use Illuminate\Support\Facades\Route;
 Route::get('/', function () {
     return view('welcome');
 });
+Route::get('/test', [CarController::class, 'test'])->name('cars.index');
+
 
 Route::middleware(['auth'])->group(function () {
     Route::get('/dashboard', function () {

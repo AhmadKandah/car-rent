@@ -12,9 +12,8 @@ return new class extends Migration
     public function up(): void
     {
         Schema::create('maintenance', function (Blueprint $table) {
-            $table->id('maintenance_id');
-            $table->foreignId('car_id')->constrained('cars', 'car_id');
-            $table->dateTime('maintenance_date');
+            $table->id();
+            $table->foreignId('car_id')->constrained()->onDelete('cascade');            $table->dateTime('maintenance_date');
             $table->text('description')->nullable();
             $table->decimal('cost', 8, 2)->nullable();
             $table->timestamps();

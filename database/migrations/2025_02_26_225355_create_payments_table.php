@@ -12,11 +12,12 @@ return new class extends Migration
     public function up(): void
     {
         Schema::create('payments', function (Blueprint $table) {
-            $table->id('payment_id');
-            $table->foreignId('reservation_id')->constrained('reservations', 'reservation_id');
-            $table->dateTime('payment_date');
-            $table->decimal('amount', 8, 2);
-            $table->string('payment_method');
+            $table->id();
+            $table->foreignId('reservation_id')->constrained()->onDelete('cascade'); // الحجز المرتبط بالدفع
+            $table->foreignId('user_id')->constrained()->onDelete('cascade');
+            $table->decimal('amount', 10, 2); // المبلغ المدفوع
+            $table->enum('payment_status', ['pending', 'paid', 'failed'])->default('pending'); // حالة الدفع
+            $table->enum('payment_method', ['credit_card', 'paypal', 'cash'])->default('cash'); // وسيلة الدفع
             $table->timestamps();
         });
     }
