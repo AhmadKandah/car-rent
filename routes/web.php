@@ -7,14 +7,18 @@ use App\Http\Controllers\PaymentController;
 use App\Http\Controllers\MaintenanceController;
 use Illuminate\Support\Facades\Route;
 
-Route::get('/test', [CarController::class, 'test'])->name('cars.index');
+Route::get('/test', [CarController::class, 'test']);
+Route::get('/home', [CarController::class, 'test2'])->name('home');
+
 Route::get('/', function () {
     return view('welcome');
 });
 
+Route::get('/car',[CarController::class,'index'])->name('car.index');
+
 Route::middleware(['auth'])->group(function () {
     Route::get('/dashboard', function () {
-        return view('dashboard');
+        return view('templet.home');
     })->name('dashboard');
     Route::resource('reservations', ReservationController::class)->only(['index', 'create', 'store']);
     Route::get('/dashboard/cars', [CarController::class, 'index'])->name('cars.index');

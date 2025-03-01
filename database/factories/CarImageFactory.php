@@ -21,7 +21,7 @@ class CarImageFactory extends Factory
         return [
             'car_id' => \App\Models\Car::factory(),
             
-            'path' => 'images/cars/' . collect(File::files('public/images/cars/'))->random()->getFilename()
+            'path' => 'images/imagesForCar/' . collect(File::files('public/images/imagesForCar/'))->random()->getFilename()
         ];
     }
 }

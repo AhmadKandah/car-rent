@@ -26,17 +26,23 @@ class CarController extends Controller
 }
 
 
-    public function test()
-    {
-        $cars = Car::all();
-        return view('test', compact('cars'));
-    }
+public function test()
+{
+    $cars = Car::all();
+    return view('test', compact('cars'));
+}
+
+public function test2()
+{
+    return view('templet.home');
+}
 
 
     public function index()
     {
-        $cars = Car::with('images')->get();
-        return view('cars.index', compact('cars'));
+        $cars = Car::with('images')->paginate(6);
+ 
+        return view('templet.car.index', compact('cars'));
     }
 
     public function create()
