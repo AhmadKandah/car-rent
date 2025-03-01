@@ -6,7 +6,7 @@ use App\Http\Controllers\ReservationController;
 use App\Http\Controllers\PaymentController;
 use App\Http\Controllers\MaintenanceController;
 use Illuminate\Support\Facades\Route;
-
+//السلام عليكم ورحمة الله 
 Route::get('/test', [CarController::class, 'test']);
 Route::get('/home', [CarController::class, 'test2'])->name('home');
 
