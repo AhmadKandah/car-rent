@@ -7,7 +7,7 @@
         <div class="block-18">
           <div class="text text-border d-flex align-items-center">
             <strong class="number" data-number="60">0</strong>
-            <span>Year <br>Experienced</span>
+            <span>سنوات <br>من الخبرة</span>
           </div>
         </div>
       </div>

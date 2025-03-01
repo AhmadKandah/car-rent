@@ -3,7 +3,7 @@
     					<div class="img rounded d-flex align-items-end" style="background-image: url({{ asset($car->images->first()->path) }});">
     					</div>
 					<div class="text">
-    <h2 class="mb-0"><a href="car-single.html">Mercedes Grand Sedan</a></h2>
+    <h2 class="mb-0"><a href="car-single.html">{{ $car->model }}</a></h2>
     <div class="d-flex flex-column mb-3">
         <span class="cat">{{ $car->brand }}</span>
         <div class="price"> {{ $car->price_per_day }} <span>/day</span></div>

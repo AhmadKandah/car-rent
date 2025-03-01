@@ -16,6 +16,7 @@ return new class extends Migration
             $table->foreignId('user_id')->constrained()->onDelete('cascade'); 
             $table->foreignId('car_id')->constrained()->onDelete('cascade');  
             $table->date('start_date'); 
+            //استكمال باقي معلومات الحجز
             $table->date('end_date'); 
             $table->enum('status', ['pending', 'confirmed', 'canceled'])->default('pending'); // حالة الحجز
             $table->timestamps();
