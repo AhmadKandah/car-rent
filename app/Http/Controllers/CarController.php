@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Http\Requests\CarRequest;
 use App\Models\Car;
 use App\Models\CarImage;
 use App\Models\Customer;
@@ -10,6 +11,20 @@ use Illuminate\Http\Request;
 
 class CarController extends Controller
 {
+    private function handleImageUpload(Request $request, Car $car)
+{
+    if ($request->hasFile('image')) {
+        $image = $request->file('image');
+        $imageName = time() . '.' . $image->getClientOriginalExtension();
+        $image->move(public_path('images/cars'), $imageName);
+
+        CarImage::updateOrCreate(
+            ['car_id' => $car->id],
+            ['path' => 'images/cars/' . $imageName]
+        );
+    }
+}
+
 
     public function test()
     {
@@ -20,7 +35,7 @@ class CarController extends Controller
 
     public function index()
     {
-        $cars = Car::all();
+        $cars = Car::with('images')->get();
         return view('cars.index', compact('cars'));
     }
 
@@ -29,80 +44,32 @@ class CarController extends Controller
         return view('cars.create');
     }
 
-    public function store(Request $request )
-    {
-
-        $request->validate([
-            'license_plate' => 'required|string|max:255|unique:cars,license_plate',
-            'make' => 'required|string|max:255',
-            'brand' => 'required|string|max:255',
-            'model' => 'required|string|max:255',
-            'year' => 'required|integer|min:1900|max:' . date('Y'),
-            'color' => 'required|string|max:255',
-            'price_per_month'  => 'required|numeric|min:0',
-            'price_per_day'  => 'required|numeric|min:0',
-            'price_per_hour'  => 'required|numeric|min:0',
-            'status' => 'required|in:available,rented,maintenance',
-            'image' => 'nullable|image|max:2048',
-            'description' => 'nullable|string',
-            'user_id' => 'required|exists:users,id',
-        ]);
+    public function store(CarRequest $request)
+    {      
         $data = $request->all();
-    $car = Car::create($data);
+        $car = Car::create($data);
 
-    if ($request->hasFile('image')) {
-        $image = $request->file('image');
-        $imageName = time() . '.' . $image->getClientOriginalExtension();
-        $image->move(public_path('images/cars'), $imageName);
+        $this->handleImageUpload($request, $car);
 
-        CarImage::create([
-        'car_id' => $car->id,
-        'path' => 'images/cars/' . $imageName,
-        ]);
-    }
 
-   
 
-       
         return redirect()->route('cars.index')->with('success', 'تم إضافة السيارة بنجاح');
     }
 
     public function edit($id)
     {
-        $car = Car::findOrFail($id);
+        $car=car::with('car_images')->findOrFail($id);
         return view('cars.edit', compact('car'));
     }
 
-    public function update(Request $request, $id)
+    public function update(CarRequest $request, $id)
     {
         $car = Car::findOrFail($id);
-
-        $request->validate([
-            'license_plate' => 'required|string|max:255|unique:cars,license_plate,' . $car->id . ',id',
-            'make' => 'required|string|max:255',
-            'model' => 'required|string|max:255',
-            'year' => 'required|integer|min:1900|max:' . date('Y'),
-            'color' => 'required|string|max:255',
-            'price_per_month'  => 'required|numeric|min:0',
-            'price_per_day'  => 'required|numeric|min:0',
-            'price_per_hour'  => 'required|numeric|min:0',
-            'status' => 'required|in:available,rented,maintenance',
-            'image' => 'nullable|image|max:2048',
-        ]);
-
         $data = $request->all();
-
-        if ($request->hasFile('image')) {
-            $image = $request->file('image');
-            $imageName = time() . '.' . $image->getClientOriginalExtension();
-            $image->move(public_path('images/cars'), $imageName);
-            $data['image'] = 'images/cars/' . $imageName;
-        }
-
-        CarImage::where('car_id', $car->id)->update([
-            'path' => "images/cars/{$imageName}"
-        ]);
         $car->update($data);
+
+        $this->handleImageUpload($request, $car);
+
         return redirect()->route('cars.index')->with('success', 'تم تعديل السيارة بنجاح');
     }
 

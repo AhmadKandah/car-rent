@@ -28,7 +28,7 @@ class CarFactory extends Factory
             'price_per_hour' => fake()->numberBetween(10, 100),
             'price_per_day' => fake()->numberBetween(100, 1000),
             'price_per_month' => fake()->numberBetween(1000, 10000),
-            'status' => fake()->randomElement(['available', 'rented', 'unavailable']),
+            'status' => fake()->randomElement(['available', 'rented', 'maintenance']),
             'description' => fake()->sentence(),
             'user_id' =>User::factory(), 
             'license_plate' => fake()->unique()->bothify('??###'), // Add license_plate field

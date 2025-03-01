@@ -4,6 +4,7 @@
     <h1 class="text-4xl font-bold text-gray-800 mb-8 text-center">إضافة سيارة جديدة</h1>
     <form action="{{ route('cars.store', ['user_id' => auth()->id()]) }}" method="POST" enctype="multipart/form-data" class="bg-white p-8 rounded-xl shadow-lg max-w-2xl mx-auto">
         @csrf
+        
         <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
             <div>
                 <label class="block text-sm font-semibold text-gray-700 mb-2">رقم اللوحة</label>
@@ -13,7 +14,7 @@
                 @enderror
             </div>
             <div>
-                <label class="block text-sm font-semibold text-gray-700 mb-2">رقم اbrandحة</label>
+                <label class="block text-sm font-semibold text-gray-700 mb-2">العلامة التجارية</label>
                 <input type="text" name="brand" value="{{ old('brand') }}" class="block w-full border-gray-300 rounded-md shadow-sm focus:ring-blue-500 focus:border-blue-500" required>
                 @error('brand')
                     <span class="text-red-600 text-sm mt-1">{{ $message }}</span>
@@ -26,7 +27,6 @@
                     <span class="text-red-600 text-sm mt-1">{{ $message }}</span>
                 @enderror
             </div>
-            
             <div>
                 <label class="block text-sm font-semibold text-gray-700 mb-2">الشركة المصنعة</label>
                 <input type="text" name="make" value="{{ old('make') }}" class="block w-full border-gray-300 rounded-md shadow-sm focus:ring-blue-500 focus:border-blue-500" required>
@@ -68,7 +68,7 @@
                 @error('price_per_day')
                     <span class="text-red-600 text-sm mt-1">{{ $message }}</span>
                 @enderror
-            <div>
+            </div>
             <div>
                 <label class="block text-sm font-semibold text-gray-700 mb-2">السعر لساعة واحدة</label>
                 <input type="number" name='price_per_hour' step="0.01" value="{{ old('price_per_hour') }}" class="block w-full border-gray-300 rounded-md shadow-sm focus:ring-blue-500 focus:border-blue-500" required>
@@ -76,6 +76,7 @@
                     <span class="text-red-600 text-sm mt-1">{{ $message }}</span>
                 @enderror
             </div>
+            <div>
                 <label class="block text-sm font-semibold text-gray-700 mb-2">الحالة</label>
                 <select name="status" class="block w-full border-gray-300 rounded-md shadow-sm focus:ring-blue-500 focus:border-blue-500" required>
                     <option value="available" {{ old('status') === 'available' ? 'selected' : '' }}>متاحة</option>
@@ -93,7 +94,6 @@
                     <span class="text-red-600 text-sm mt-1">{{ $message }}</span>
                 @enderror
             </div>
-
         </div>
         <button type="submit" class="mt-8 w-full btn-primary text-white px-6 py-3 rounded-lg shadow-md">إضافة السيارة</button>
     </form>

@@ -3,6 +3,7 @@
 namespace Database\Factories;
 
 use Illuminate\Database\Eloquent\Factories\Factory;
+use Illuminate\Support\Facades\File; 
 
 /**
  * @extends \Illuminate\Database\Eloquent\Factories\Factory<\App\Models\CarImage>
@@ -19,6 +20,7 @@ class CarImageFactory extends Factory
     {
         return [
             'car_id' => \App\Models\Car::factory(),
+            
             'path' => 'images/cars/' . collect(File::files('public/images/cars/'))->random()->getFilename()
         ];
     }
