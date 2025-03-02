@@ -7,6 +7,7 @@ use App\Models\Car;
 use App\Models\CarImage;
 use App\Models\Customer;
 use App\Models\Reservation;
+use App\Models\Review;
 use Illuminate\Http\Request;
 
 class CarController extends Controller
@@ -34,9 +35,16 @@ public function test()
 
 public function test2()
 {
-    return view('templet.home');
+    $cars = Car::all();
+    return view('templet.details.index', compact('cars'));
 }
-
+public function show($id)
+{
+$Reviews = Review::where('car_id', $id)->with('user')->get();
+$carimages = CarImage::where('car_id', $id)->get();
+$car = Car::findOrFail($id);
+return view('templet.details.index', compact('Reviews', 'carimages', 'car'));
+}
 
     public function index()
     {

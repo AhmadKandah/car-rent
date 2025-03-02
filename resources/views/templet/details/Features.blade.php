@@ -1,0 +1,31 @@
+<div class="tab-pane fade show active" id="pills-description" role="tabpanel" aria-labelledby="pills-description-tab">
+							<div class="row">
+								<div class="col-md-4">
+									<ul class="features">
+										<li class="check"><span class="ion-ios-checkmark"></span>Airconditions</li>
+										<li class="check"><span class="ion-ios-checkmark"></span>Child Seat</li>
+										<li class="check"><span class="ion-ios-checkmark"></span>GPS</li>
+										<li class="check"><span class="ion-ios-checkmark"></span>Luggage</li>
+										<li class="check"><span class="ion-ios-checkmark"></span>Music</li>
+									</ul>
+								</div>
+								<div class="col-md-4">
+									<ul class="features">
+										<li class="check"><span class="ion-ios-checkmark"></span>Seat Belt</li>
+										<li class="remove"><span class="ion-ios-close"></span>Sleeping Bed</li>
+										<li class="check"><span class="ion-ios-checkmark"></span>Water</li>
+										<li class="check"><span class="ion-ios-checkmark"></span>Bluetooth</li>
+										<li class="remove"><span class="ion-ios-close"></span>Onboard computer</li>
+									</ul>
+								</div>
+								<div class="col-md-4">
+									<ul class="features">
+										<li class="check"><span class="ion-ios-checkmark"></span>Audio input</li>
+										<li class="check"><span class="ion-ios-checkmark"></span>Long Term Trips</li>
+										<li class="check"><span class="ion-ios-checkmark"></span>Car Kit</li>
+										<li class="check"><span class="ion-ios-checkmark"></span>Remote central locking</li>
+										<li class="check"><span class="ion-ios-checkmark"></span>Climate control</li>
+									</ul>
+								</div>
+							</div>
+						</div>
