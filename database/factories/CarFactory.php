@@ -19,20 +19,25 @@ class CarFactory extends Factory
     protected $model = \App\Models\Car::class;
     
     public function definition(): array
-    {
-        return [
-            'brand' => fake()->company(),
-            'model' => fake()->word(),
-            'year' => fake()->year(),
-            'color' => fake()->colorName(),            
-            'price_per_hour' => fake()->numberBetween(10, 100),
-            'price_per_day' => fake()->numberBetween(100, 1000),
-            'price_per_month' => fake()->numberBetween(1000, 10000),
-            'status' => fake()->randomElement(['available', 'rented', 'maintenance']),
-            'description' => fake()->sentence(),
-            'user_id' =>User::factory(), 
-            'license_plate' => fake()->unique()->bothify('??###'), // Add license_plate field
-            'make' => fake()->word(), // Add make field
-        ];
-    }
+{
+    return [
+        'license_plate' => fake()->unique()->bothify('??####'),
+        'brand' => fake()->company(),
+        'model' => fake()->word(), 
+        'make' => fake()->word(),
+        'color' => fake()->colorName(),
+        'year' => fake()->year(),
+        'price_per_hour' => fake()->randomFloat(2, 10, 100), 
+        'price_per_day' => fake()->randomFloat(2, 100, 1000),
+        'price_per_month' => fake()->randomFloat(2, 1000, 10000), 
+        'mileage' => fake()->numberBetween(0, 200000), 
+        'transmission' => fake()->randomElement(['automatic', 'manual']),
+        'seats' => fake()->numberBetween(2, 8), 
+        'luggage' => fake()->numberBetween(1, 5), 
+        'fuel' => fake()->randomElement(['petrol', 'diesel', 'electric', 'hybrid']), 
+        'description' => fake()->sentence(),
+        'status' => fake()->randomElement(['available', 'rented', 'maintenance']),
+        'user_id' => User::factory(),
+    ];
+}
 }
