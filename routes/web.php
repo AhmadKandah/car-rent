@@ -14,7 +14,12 @@ Route::get('/', function () {
     return view('welcome');
 });
 
+
 // Route::get('/car',action: [CarController::class,'index'])->name('car.index');
+
+Route::get('/add',function(){return view('templet.car.add');});
+Route::get('/car',[CarController::class,'index'])->name('car.index');
+
 
 // Route::middleware(['auth'])->group(function () {
 //     Route::get('/dashboard', function () {
