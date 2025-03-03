@@ -31,9 +31,9 @@
 
                 <div class="tab-content" id="pills-tabContent">
 
-                    @include('templet.details.Features')
-                    @include('templet.details.Description')
-                    @include('templet.details.Review')
+                    @include('templet.details.Features.Features')
+                    @include('templet.details.Description.Description')
+                    @include('templet.details.Review.index')
 
 
 

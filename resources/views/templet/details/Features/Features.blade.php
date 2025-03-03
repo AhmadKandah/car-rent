@@ -1,4 +1,4 @@
-<div class="tab-pane fade show active" id="pills-description" role="tabpanel" aria-labelledby="pills-description-tab">
+<!-- <div class="tab-pane fade show active" id="pills-description" role="tabpanel" aria-labelledby="pills-description-tab">
 							<div class="row">
 								<div class="col-md-4">
 									<ul class="features">
@@ -28,4 +28,4 @@
 									</ul>
 								</div>
 							</div>
-						</div>
+						</div> -->

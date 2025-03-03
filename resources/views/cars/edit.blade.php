@@ -2,7 +2,7 @@
 @section('title', 'تعديل السيارة')
 @section('content')
     <h1 class="text-4xl font-bold text-gray-800 mb-8 text-center">تعديل بيانات السيارة</h1>
-    <form action="{{ route('cars.update', $car->id) }}" method="POST" enctype="multipart/form-data" class="bg-white p-8 rounded-xl shadow-lg max-w-2xl mx-auto">
+    <form action="{{ route('car.update', $car->id) }}" method="POST" enctype="multipart/form-data" class="bg-white p-8 rounded-xl shadow-lg max-w-2xl mx-auto">
         @csrf
         @method('PUT')
         <div class="grid grid-cols-1 md:grid-cols-2 gap-6">

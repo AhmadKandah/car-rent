@@ -21,7 +21,7 @@ class ReviewFactory extends Factory
             'rating' => $this->faker->numberBetween(1, 5),
             'comment' => $this->faker->sentence(),
             'user_id' => $this->faker->numberBetween(1, 5),
-            'car_id' => $this->faker->numberBetween(1, 5),
+            'car_id' => $this->faker->numberBetween(1, 1),
 
         ];
     }

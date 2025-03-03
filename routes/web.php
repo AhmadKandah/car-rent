@@ -14,7 +14,7 @@ Route::get('/', function () {
     return view('welcome');
 });
 
-Route::get('/car',[CarController::class,'index'])->name('car.index');
+// Route::get('/car',action: [CarController::class,'index'])->name('car.index');
 
 // Route::middleware(['auth'])->group(function () {
 //     Route::get('/dashboard', function () {
@@ -26,7 +26,7 @@ Route::get('/car',[CarController::class,'index'])->name('car.index');
 // });
 
 Route::middleware([])->group(function () {
-    Route::resource('cars', CarController::class);
+    Route::resource('car', CarController::class);
     Route::resource('customers', CustomerController::class);
     Route::resource('reservations', ReservationController::class)->only(['edit', 'update', 'destroy']);
     Route::resource('payments', PaymentController::class);
