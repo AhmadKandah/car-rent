@@ -30,7 +30,7 @@ class CarController extends Controller
     public function test()
     {
         $cars = Car::all();
-        return view('test', compact('cars'));
+        return view('templet.car.reservation', compact('cars'));
     }
 
     public function test2()
