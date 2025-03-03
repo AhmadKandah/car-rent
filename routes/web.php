@@ -17,7 +17,7 @@ Route::get('/', function () {
 
 // Route::get('/car',action: [CarController::class,'index'])->name('car.index');
 
-Route::get('/add',function(){return view('templet.car.add');});
+Route::get('/create',function(){return view('templet.car.create');});
 Route::get('/car',[CarController::class,'index'])->name('car.index');
 
 
