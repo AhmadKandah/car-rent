@@ -28,7 +28,7 @@ return new class extends Migration
             $table->integer('luggage');
             $table->string('fuel');
             $table->text('description');
-            $table->enum('status', ['available', 'rented', 'maintenance'])->default('available'); 
+            $table->enum('status', ['available', 'rented', 'maintenance','unavailable'])->default('available'); 
             $table->foreignId('user_id')->constrained()->onDelete('cascade'); 
 
             $table->timestamps();

@@ -23,15 +23,19 @@
                 @endif
             @endfor
                 </p>
+                @can('delete', $car)
                 <form action="{{ route('car.destroy', ['car' => $car->id]) }}" method="POST" style="display:inline;">
                     @csrf
                     @method('DELETE')
                     <button type="submit" class="btn btn-danger">Delete</button>
                 </form>
+                @endcan
+                @can('update', $car)
                 <form action="{{ route('car.edit', ['car' => $car->id]) }}" method="GET" style="display:inline;">
                     @csrf
                     <button type="submit" class="btn btn-primary">Edit</button>
                 </form>
+                @endcan
         </p>
         
     </td>

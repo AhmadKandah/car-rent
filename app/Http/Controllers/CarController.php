@@ -8,8 +8,9 @@ use App\Models\CarImage;
 use App\Models\Customer;
 use App\Models\Reservation;
 use App\Models\Review;
+use App\Models\User;
 use Illuminate\Http\Request;
-
+use Illuminate\Support\Facades\Auth;
 class CarController extends Controller
 {
     private function handleImageUpload(Request $request, Car $car)
@@ -27,16 +28,17 @@ class CarController extends Controller
     }
 
 
-    public function test()
+    public function Home()
     {
-        $cars = Car::all();
-        return view('templet.car.reservation', compact('cars'));
+
+        $users = User::all();
+        return view('templet.HomeForUser.index', compact('users'));
     }
 
     public function test2()
     {
         $cars = Car::all();
-        return view('templet.details.index', compact('cars'));
+        return view('test', compact('cars'));
     }
     public function show($id)
     {
@@ -50,22 +52,16 @@ class CarController extends Controller
     }
    
   
-    // public function index()
-    // {
-    //     $cars = Car::with('images')->paginate(6);
-
-    //     return view('templet.car.index', compact('cars'));
-    // }
     public function index()
     {
         $cars = Car::with('images')->paginate(5);
 
         return view('templet.pricing.index', compact('cars'));
     }
-
+    
     public function create()
     {
-        return view('cars.create');
+        return view('templet.car.create');
     }
 
     public function store(CarRequest $request)
@@ -76,14 +72,14 @@ class CarController extends Controller
         $this->handleImageUpload($request, $car);
 
 
-
-        return redirect()->route('cars.index')->with('success', 'تم إضافة السيارة بنجاح');
+        $lastPage = $car->paginate(5)->lastPage();
+        return redirect()->route('car.index', ['page' => $lastPage])->with('success', 'تم إضافة السيارة بنجاح');
     }
 
     public function edit($id)
     {
         $car = car::with('images')->findOrFail($id);
-        return view('cars.edit', compact('car'));
+        return view('templet.car.edit', compact('car'));
     }
 
     public function update(CarRequest $request, $id)
@@ -94,7 +90,7 @@ class CarController extends Controller
 
         $this->handleImageUpload($request, $car);
 
-        return redirect()->route('cars.index')->with('success', 'تم تعديل السيارة بنجاح');
+        return redirect()->route('car.index')->with('success', 'تم تعديل السيارة بنجاح');
     }
 
     public function reserve(Request $request, $id)
@@ -102,7 +98,7 @@ class CarController extends Controller
         $car = Car::findOrFail($id);
 
         if ($car->status !== 'available') {
-            return redirect()->route('cars.index')->with('error', 'هذه السيارة غير متاحة للحجز');
+        return redirect()->route('car.index')->with('error', 'هذه السيارة غير متاحة للحجز');
         }
 
         $user = auth()->user();

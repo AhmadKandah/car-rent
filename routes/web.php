@@ -5,6 +5,7 @@ use App\Http\Controllers\CarController;
 use App\Http\Controllers\ReservationController;
 use App\Http\Controllers\PaymentController;
 use App\Http\Controllers\MaintenanceController;
+use App\Http\Controllers\UserController;
 use Illuminate\Support\Facades\Route;
 //السلام عليكم ورحمة الله 
 Route::get('/test', [CarController::class, 'test']);
@@ -14,11 +15,10 @@ Route::get('/', function () {
     return view('welcome');
 });
 
-
+Route::get('/home', [CarController::class, 'Home'])->name('home');
 // Route::get('/car',action: [CarController::class,'index'])->name('car.index');
 
 Route::get('/create',function(){return view('templet.car.create');});
-Route::get('/car',[CarController::class,'index'])->name('car.index');
 
 
 // Route::middleware(['auth'])->group(function () {
@@ -36,6 +36,8 @@ Route::middleware([])->group(function () {
     Route::resource('reservations', ReservationController::class)->only(['edit', 'update', 'destroy']);
     Route::resource('payments', PaymentController::class);
     Route::resource('maintenance', MaintenanceController::class);
+    Route::resource('users', UserController::class);
 });
+
 
 require __DIR__ . '/auth.php';

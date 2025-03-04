@@ -11,19 +11,26 @@ class Car extends Model
 {
     use HasFactory;
     protected $fillable = [
-    'make',
-    'model',
-    'year',
-    'color',
-    'mileage',
-    'price_per_day',
-    'user_id',
-    'transmission',
-    'fuel_type',
-    'seating_capacity',
-    'engine_capacity',
-    'description',
-    'availability_status',
+        'license_plate',
+        'brand',
+        'model',
+        'make',
+        'color',
+        'year',
+        'price_per_hour',
+        'price_per_day',
+        'price_per_month',
+        'mileage',
+        'transmission',
+        'seats',
+        'luggage',
+        'fuel',
+        'description',
+        'status',
+        'user_id',
+
+        
+        
     ];
     public function images()
     {
